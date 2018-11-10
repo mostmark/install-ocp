@@ -6,23 +6,19 @@ etcd
 [OSEv3:vars]
 # if your target hosts are Fedora uncomment this
 #ansible_python_interpreter=/usr/bin/python3
-#openshift_deployment_type=origin
 openshift_deployment_type=openshift-enterprise
-openshift_release=3.10
 containerized=true
-osm_cluster_network_cidr=10.128.0.0/14
 openshift_portal_net=172.30.0.0/16
-osm_host_subnet_length=9
 # localhost likely doesn't meet the minimum requirements
 openshift_disable_check=disk_availability,memory_availability
+
+openshift_node_groups=[{'name': 'node-config-all-in-one', 'labels': ['node-role.kubernetes.io/master=true', 'node-role.kubernetes.io/infra=true', 'node-role.kubernetes.io/compute=true']}]
+
 openshift_ip=MY-IP-ADDRESS
 openshift_hostname=console.MY-IP-ADDRESS.nip.io
 openshift_public_hostname=console.MY-IP-ADDRESS.nip.io
 openshift_master_default_subdomain=apps.console.MY-IP-ADDRESS.nip.io
-oreg_url=registry.access.redhat.com/openshift3/ose-${component}:${version}
-openshift_examples_modify_imagestreams=true
-openshift_master_identity_providers=[{'name': 'htpasswd_auth', 'login': 'true', 'challenge': 'true', 'kind': 'HTPasswdPasswordIden
-tityProvider', 'filename': '/etc/origin/master/htpasswd'}]
+openshift_master_identity_providers=[{'name': 'htpasswd_auth', 'login': 'true', 'challenge': 'true', 'kind': 'HTPasswdPasswordIdentityProvider'}]
 
 [masters]
 localhost ansible_connection=local
@@ -31,4 +27,5 @@ localhost ansible_connection=local
 localhost ansible_connection=local
 
 [nodes]
-localhost  ansible_connection=local openshift_schedulable=true openshift_node_labels="{'region': 'infra', 'zone': 'default'}"
+# openshift_node_group_name should refer to a dictionary with matching key of name in list openshift_node_groups.
+localhost ansible_connection=local openshift_node_group_name="node-config-all-in-one"
