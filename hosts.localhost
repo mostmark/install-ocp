@@ -1,5 +1,3 @@
-#bare minimum hostfile
-
 [OSEv3:children]
 masters
 nodes
