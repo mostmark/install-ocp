@@ -8,7 +8,7 @@ etcd
 #ansible_python_interpreter=/usr/bin/python3
 #openshift_deployment_type=origin
 openshift_deployment_type=openshift-enterprise
-openshift_release=3.9
+openshift_release=3.10
 containerized=true
 osm_cluster_network_cidr=10.128.0.0/14
 openshift_portal_net=172.30.0.0/16
