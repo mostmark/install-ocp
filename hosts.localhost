@@ -20,6 +20,9 @@ openshift_public_hostname=console.MY-IP-ADDRESS.nip.io
 openshift_master_default_subdomain=apps.console.MY-IP-ADDRESS.nip.io
 openshift_master_identity_providers=[{'name': 'htpasswd_auth', 'login': 'true', 'challenge': 'true', 'kind': 'HTPasswdPasswordIdentityProvider'}]
 
+oreg_auth_user=MY-USER
+oreg_auth_password=MY-PASSWORD
+
 [masters]
 localhost ansible_connection=local
 
